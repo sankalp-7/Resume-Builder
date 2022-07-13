@@ -1,0 +1,197 @@
+<html>
+    <head>
+        
+<style>
+ 
+
+
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 90vh;
+  overflow: hidden;
+  font-family: "Open Sans", sans-serif;
+
+  display: grid;
+  place-items: center;
+  background-color: #110e1b;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  position: relative;
+}
+
+.front_card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 450px;
+  background-color: #5c162e;
+
+  display: flex;
+
+  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+  /*clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);*/
+  transition: clip-path 0.5s ease;
+}
+
+.front_card > .login_form {
+  opacity: 1;
+  transition: opacity 0.2s linear;
+}
+
+.front_card > .signup_form {
+  opacity: 0;
+  transition: opacity 0.2s linear;
+}
+
+.front_card.front_card_signup > .login_form {
+  opacity: 0;
+}
+
+.front_card.front_card_signup {
+  clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+}
+
+.front_card.front_card_signup > .signup_form {
+  opacity: 1;
+  margin-bottom: 0;
+}
+
+.front_card form {
+  color: #f8f9fa;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 20px;
+}
+
+.back_card {
+  width: 650px;
+  height: 350px;
+  background-color: #7c162e;
+  display: flex;
+}
+
+.back_card > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.back_card > div > h2 {
+  color: #f3f3f3;
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  outline: none;
+  font-size: 13px;
+  border-radius: 4px;
+  font-family: "Open Sans", sans-serif;
+  padding: 12px 10px;
+  font-weight: 400;
+  width: 100%;
+  box-sizing: border-box;
+  background: #110e1b;
+  color: #f3f3f3;
+  border: 1px solid #7c162e;
+}
+
+input:focus {
+  border: 1px solid #f3f3f3;
+}
+
+button {
+  border: none;
+  box-shadow: none;
+  font-family: "Open Sans", sans-serif;
+  background-color: #f3f3f3;
+  padding: 10px 20px;
+  border-radius: 20px;
+}
+button:hover{
+    cursor: pointer;
+}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Carter+One&family=Playfair+Display:ital,wght@1,600&family=Poppins&family=Tapestry&family=Titan+One&family=Water+Brush&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <h1 style="color: white; font-family: Carter One;margin-bottom: 35px;">Resume Builder</h1>
+        
+        <div class="container">
+            <div class="front_card">
+              <form action="#" class="login_form" method="post">
+                {% csrf_token %}
+                <input type="text" class="user_email" placeholder="Username" name="email" autofocus />
+                <input type="password" class="user_password" placeholder="Password" name="password">
+                <button class="login_btn">Login</button>
+              </form>
+              <form action="#" class="signup_form" method="post">
+                {% csrf_token %}
+                <!-- <input type="text" class="user_full_name" placeholder="Full Name">
+                <input type="email" class="user_email" placeholder="Email" />
+                <input type="password" class="user_password" placeholder="Password"> -->
+                  {% for field in form %}
+                      {{field}}
+                  {% endfor %}
+                <button class="login_btn">Signup</button>
+              </form>
+            </div>
+            <div class="back_card">
+              <div class="login_msg">
+                <h2>Have account?</h2>
+                <button class="login_msg_btn">Login</button>
+              </div>
+              <div class="signup_msg">
+                <h2>Do not have account?</h2>
+                <button class="signup_msg_btn">Signup</button>
+              </div>
+            </div>
+          </div>
+          <script>
+            const frontCard = document.querySelector(".front_card");
+const signUpBtn = document.querySelector(".signup_msg_btn");
+const loginBtn = document.querySelector(".login_msg_btn");
+const userEmailInp = document.querySelector(".user_email");
+const userFNameInp = document.querySelector(".user_full_name");
+
+signUpBtn.addEventListener("click", () => {
+  frontCard.classList.add("front_card_signup");
+  userFNameInp.focus();
+});
+
+loginBtn.addEventListener("click", () => {
+  frontCard.classList.remove("front_card_signup");
+  userEmailInp.focus();
+});
+
+          </script>
+    </body>
+</html>
