@@ -1,5 +1,5 @@
 # Resume-Builder
-Build your own resumes using this simple webapp. Just fill a form and wait for the resume to be sent to your mail.
+Build your own resumes using this simple webapp. Just fill a form and wait for the resume to be built.You can download the resume after.
 Resume Building Done By Using PILLOW Python Library.
 FUN FACT:- The resume which you will get is actually available for 800/- in the internet. Now it is free 😝
 
